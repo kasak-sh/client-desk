@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1>Bookings</h1>
+  <%= link_to "New Booking", new_booking_path(account_slug: @account.slug), class: "btn btn-primary" %>
+</div>
+
+<% if @bookings.any? %>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Client</th>
+          <th>Scheduled At</th>
+          <th>Duration (min)</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @bookings.each do |booking| %>
+          <tr>
+            <td><%= link_to booking.title, booking_path(account_slug: @account.slug, id: booking) %></td>
+            <td><%= link_to booking.client.name, client_path(account_slug: @account.slug, id: booking.client) %></td>
+            <td><%= booking.scheduled_at.strftime("%b %d, %Y %I:%M %p") %></td>
+            <td><%= booking.duration_minutes %></td>
+            <td>
+              <span class="badge bg-<%=
+                case booking.status
+                when 'pending' then 'warning'
+                when 'confirmed' then 'success'
+                when 'completed' then 'info'
+                when 'cancelled' then 'danger'
+                end
+              %>">
+                <%= booking.status.titleize %>
+              </span>
+            </td>
+            <td>
+              <div class="action-buttons">
+                <%= link_to "View", booking_path(account_slug: @account.slug, id: booking), class: "btn btn-sm btn-info" %>
+                <%= link_to "Edit", edit_booking_path(account_slug: @account.slug, id: booking), class: "btn btn-sm btn-warning" %>
+                <%= button_to "Delete", booking_path(account_slug: @account.slug, id: booking), method: :delete,
+                    data: { confirm: "Are you sure?" },
+                    class: "btn btn-sm btn-danger" %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <div class="alert alert-info">
+    <p class="mb-0">No bookings yet. <%= link_to "Create your first booking", new_booking_path(account_slug: @account.slug) %></p>
+  </div>
+<% end %>

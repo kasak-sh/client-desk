@@ -1,0 +1,229 @@
+/* ClientDesk Custom Theme - Soft Indigo + Warm Gray */
+
+/* Import Inter Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Color Variables */
+:root {
+  --primary-indigo: #5C6AC4;
+  --accent-lavender: #C1C4E9;
+  --bg-warm-gray: #F7F7F9;
+  --text-primary: #2E2E3A;
+  --text-secondary: #6B6B7B;
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Bootstrap Primary Color Override */
+.bg-primary {
+  background-color: #5C6AC4 !important;
+}
+
+.text-primary {
+  color: #5C6AC4 !important;
+}
+
+.btn-primary {
+  background-color: #5C6AC4 !important;
+  border-color: #5C6AC4 !important;
+  color: #ffffff !important;
+}
+
+.btn-primary:hover {
+  background-color: #4a5aa3 !important;
+  border-color: #4a5aa3 !important;
+}
+
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: #4a5aa3 !important;
+  border-color: #4a5aa3 !important;
+  box-shadow: 0 0 0 0.2rem rgba(92, 106, 196, 0.5) !important;
+}
+
+/* Bootstrap Info Color Override (for View buttons) */
+.btn-info {
+  background-color: #5C6AC4 !important;
+  border-color: #5C6AC4 !important;
+  color: #ffffff !important;
+}
+
+.btn-info:hover {
+  background-color: #4a5aa3 !important;
+  border-color: #4a5aa3 !important;
+}
+
+/* Accent Color */
+.bg-accent {
+  background-color: #C1C4E9 !important;
+}
+
+.text-accent {
+  color: #C1C4E9 !important;
+}
+
+/* Neutral Background */
+.bg-light-neutral {
+  background-color: #F7F7F9 !important;
+}
+
+body {
+  background-color: #F7F7F9 !important;
+  color: #2E2E3A !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+/* Apply Inter font globally */
+* {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Text Colors */
+.text-primary-dark {
+  color: #2E2E3A !important;
+}
+
+.text-secondary {
+  color: #6B6B7B !important;
+}
+
+/* Card Styling */
+.card {
+  border: 1px solid #e8e8ea;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e8e8ea;
+  color: #2E2E3A;
+}
+
+/* Table Styling */
+.table {
+  color: #2E2E3A;
+}
+
+.table thead th {
+  color: #2E2E3A;
+  font-weight: 600;
+  border-bottom: 2px solid #e8e8ea;
+}
+
+/* Navbar - Custom Indigo */
+.navbar-custom {
+  background-color: #5C6AC4 !important;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link {
+  color: #ffffff !important;
+}
+
+.navbar-custom .navbar-brand:hover {
+  color: #ffffff !important;
+  opacity: 0.9;
+}
+
+.navbar-custom .nav-link:hover {
+  color: #C1C4E9 !important;
+}
+
+.navbar-custom .nav-link.active {
+  color: #ffffff !important;
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 0.25rem;
+}
+
+.navbar-custom .navbar-text {
+  color: #ffffff !important;
+}
+
+/* Badge Colors with Theme */
+.badge.bg-success {
+  background-color: #10b981 !important;
+}
+
+.badge.bg-warning {
+  background-color: #f59e0b !important;
+}
+
+.badge.bg-danger {
+  background-color: #ef4444 !important;
+}
+
+.badge.bg-info {
+  background-color: #3b82f6 !important;
+}
+
+.badge.bg-primary {
+  background-color: #5C6AC4 !important;
+}
+
+/* Links */
+a {
+  color: #5C6AC4;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #4a5aa3;
+  text-decoration: underline;
+}
+
+/* Form Controls */
+.form-control:focus,
+.form-select:focus {
+  border-color: #5C6AC4;
+  box-shadow: 0 0 0 0.2rem rgba(92, 106, 196, 0.25);
+}
+
+/* Alert Styling */
+.alert-info {
+  background-color: #eff6ff;
+  border-color: #C1C4E9;
+  color: #2E2E3A;
+}
+
+.alert-success {
+  background-color: #f0fdf4;
+  border-color: #86efac;
+  color: #2E2E3A;
+}
+
+/* List Group Items */
+.list-group-item-action:hover {
+  background-color: #F7F7F9;
+}
+
+.list-group-item-action:focus {
+  background-color: #F7F7F9;
+  color: #2E2E3A;
+}
+
+/* Action Buttons - Inline and Compact */
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.action-buttons .btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.813rem;
+  white-space: nowrap;
+}
+
+/* Ensure buttons stay on one line in tables */
+td .action-buttons {
+  min-width: 200px;
+}
+
+/* Make small buttons even more compact */
+.btn-sm {
+  font-size: 0.813rem;
+  padding: 0.25rem 0.75rem;
+  line-height: 1.5;
+}

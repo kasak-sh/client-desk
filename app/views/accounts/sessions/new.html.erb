@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <% if @account.logo.attached? %>
+          <div class="text-center mb-4">
+            <%= image_tag @account.logo, class: "img-fluid", style: "max-height: 80px;" %>
+          </div>
+        <% end %>
+
+        <h2 class="card-title text-center mb-2"><%= @account.name %></h2>
+        <p class="text-muted text-center mb-4">Client Portal Login</p>
+
+        <%= form_with url: account_login_path(account_slug: @account.slug), method: :post, local: true do |form| %>
+          <div class="mb-3">
+            <%= form.label :email, class: "form-label" %>
+            <%= form.email_field :email, class: "form-control", required: true, autofocus: true, placeholder: "your.email@#{@account.name.parameterize}.com" %>
+          </div>
+
+          <div class="mb-3">
+            <%= form.label :password, class: "form-label" %>
+            <%= form.password_field :password, class: "form-control", required: true %>
+          </div>
+
+          <div class="d-grid">
+            <%= form.submit "Login", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+
+        <div class="text-center mt-3">
+          <p class="text-muted small">
+            <small>Don't have an account? Contact your administrator.</small>
+          </p>
+        </div>
+
+        <div class="text-center mt-4 pt-3" style="border-top: 1px solid #e8e8ea;">
+          <div class="d-flex align-items-center justify-content-center" style="opacity: 0.6;">
+            <small class="text-muted me-2">Powered by</small>
+            <%= image_tag "logo.svg", alt: "ClientDesk", style: "height: 20px; margin-right: 6px;" %>
+            <%= image_tag "clientdesk-wordmark.svg", alt: "ClientDesk", style: "height: 18px;" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

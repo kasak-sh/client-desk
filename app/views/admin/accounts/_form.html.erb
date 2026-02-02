@@ -1,0 +1,50 @@
+<%= form_with(model: [:admin, account], local: true) do |form| %>
+  <% if account.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(account.errors.count, "error") %> prohibited this account from being saved:</h4>
+      <ul>
+        <% account.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control", required: true %>
+    <div class="form-text">The account name will auto-generate a URL slug</div>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :slug, "URL Slug", class: "form-label" %>
+    <%= form.text_field :slug, class: "form-control", placeholder: "Leave blank to auto-generate from name" %>
+    <div class="form-text">Used in the login URL: /#{account.slug || 'your-slug'}/login</div>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :logo, class: "form-label" %>
+    <%= form.file_field :logo, class: "form-control", accept: "image/*" %>
+    <% if account.logo.attached? %>
+      <div class="mt-2">
+        <p class="text-muted small">Current logo:</p>
+        <%= image_tag account.logo, class: "img-thumbnail", style: "max-height: 100px;" %>
+      </div>
+    <% end %>
+    <div class="form-text">Logo will be displayed on the account's login page</div>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :status, class: "form-label" %>
+    <%= form.select :status,
+        options_for_select([['Active', 'active'], ['Inactive', 'inactive']], account.status),
+        {},
+        { class: "form-select", required: true } %>
+    <div class="form-text">Inactive accounts cannot access the system</div>
+  </div>
+
+  <div class="d-grid gap-2 d-md-flex">
+    <%= form.submit class: "btn btn-primary" %>
+    <%= link_to "Cancel", admin_accounts_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

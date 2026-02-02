@@ -1,0 +1,55 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1>Accounts</h1>
+  <%= link_to "New Account", new_admin_account_path, class: "btn btn-primary" %>
+</div>
+
+<% if @accounts.any? %>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Login URL</th>
+          <th>Status</th>
+          <th>Users</th>
+          <th>Clients</th>
+          <th>Bookings</th>
+          <th>Created</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @accounts.each do |account| %>
+          <tr>
+            <td><%= link_to account.name, admin_account_path(account) %></td>
+            <td>
+              <code class="small">/<%=account.slug%>/login</code>
+            </td>
+            <td>
+              <span class="badge bg-<%= account.active? ? 'success' : 'secondary' %>">
+                <%= account.status.titleize %>
+              </span>
+            </td>
+            <td><%= account.users.count %></td>
+            <td><%= account.clients.count %></td>
+            <td><%= account.bookings.count %></td>
+            <td><%= account.created_at.strftime("%b %d, %Y") %></td>
+            <td>
+              <div class="action-buttons">
+                <%= link_to "View", admin_account_path(account), class: "btn btn-sm btn-info" %>
+                <%= link_to "Edit", edit_admin_account_path(account), class: "btn btn-sm btn-warning" %>
+                <%= button_to "Delete", admin_account_path(account), method: :delete,
+                    data: { confirm: "Are you sure? This will delete all associated users, clients, and bookings!" },
+                    class: "btn btn-sm btn-danger" %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <div class="alert alert-info">
+    <p class="mb-0">No accounts yet. <%= link_to "Create the first account", new_admin_account_path %></p>
+  </div>
+<% end %>

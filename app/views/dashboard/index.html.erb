@@ -1,0 +1,79 @@
+<h1 class="mb-4">Dashboard</h1>
+
+<div class="row mb-4">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Total Clients</h5>
+        <p class="display-4"><%= @total_clients %></p>
+        <%= link_to "View All Clients", clients_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Total Bookings</h5>
+        <p class="display-4"><%= @total_bookings %></p>
+        <%= link_to "View All Bookings", bookings_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">Upcoming Bookings (Next 7 Days)</h5>
+      </div>
+      <div class="card-body">
+        <% if @upcoming_bookings.any? %>
+          <div class="list-group list-group-flush">
+            <% @upcoming_bookings.each do |booking| %>
+              <%= link_to booking, class: "list-group-item list-group-item-action" do %>
+                <div class="d-flex w-100 justify-content-between">
+                  <h6 class="mb-1"><%= booking.title %></h6>
+                  <small><%= booking.scheduled_at.strftime("%b %d, %Y %I:%M %p") %></small>
+                </div>
+                <p class="mb-1"><%= booking.client.name %></p>
+                <small class="badge bg-<%= booking.status == 'confirmed' ? 'success' : 'warning' %>">
+                  <%= booking.status.titleize %>
+                </small>
+              <% end %>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="text-muted">No upcoming bookings</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">Recent Clients</h5>
+      </div>
+      <div class="card-body">
+        <% if @recent_clients.any? %>
+          <div class="list-group list-group-flush">
+            <% @recent_clients.each do |client| %>
+              <%= link_to client, class: "list-group-item list-group-item-action" do %>
+                <div class="d-flex w-100 justify-content-between">
+                  <h6 class="mb-1"><%= client.name %></h6>
+                  <small><%= client.created_at.strftime("%b %d, %Y") %></small>
+                </div>
+                <% if client.company.present? %>
+                  <p class="mb-1"><small><%= client.company %></small></p>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="text-muted">No clients yet</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

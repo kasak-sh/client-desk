@@ -1,0 +1,59 @@
+<%= form_with(
+  model: booking,
+  url: booking.persisted? ? booking_path(account_slug: @account.slug, id: booking) : bookings_path(account_slug: @account.slug),
+  local: true
+) do |form| %>
+  <% if booking.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(booking.errors.count, "error") %> prohibited this booking from being saved:</h4>
+      <ul>
+        <% booking.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :client_id, "Client", class: "form-label" %>
+    <%= form.collection_select :client_id, @clients, :id, :name,
+        { prompt: "Select a client" },
+        { class: "form-select", required: true } %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, class: "form-control", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_area :description, class: "form-control", rows: 4 %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :scheduled_at, "Scheduled Date & Time", class: "form-label" %>
+    <%= form.datetime_local_field :scheduled_at, class: "form-control", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :duration_minutes, "Duration (minutes)", class: "form-label" %>
+    <%= form.number_field :duration_minutes, class: "form-control", min: 0 %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :status, class: "form-label" %>
+    <%= form.select :status,
+        options_for_select(
+          [['Pending', 'pending'], ['Confirmed', 'confirmed'], ['Completed', 'completed'], ['Cancelled', 'cancelled']],
+          booking.status
+        ),
+        {},
+        { class: "form-select", required: true } %>
+  </div>
+
+  <div class="d-grid gap-2 d-md-flex">
+    <%= form.submit class: "btn btn-primary" %>
+    <%= link_to "Cancel", bookings_path(account_slug: @account.slug), class: "btn btn-secondary" %>
+  </div>
+<% end %>

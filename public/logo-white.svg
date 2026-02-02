@@ -1,0 +1,31 @@
+<svg
+  width="128"
+  height="128"
+  viewBox="0 0 128 128"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-label="ClientDesk"
+>
+  <!-- Notebook body (outlined) -->
+  <rect x="20" y="16" width="88" height="96" rx="16" fill="none" stroke="white" stroke-width="4"/>
+
+  <!-- Spine with rings -->
+  <rect x="20" y="16" width="16" height="96" rx="8" fill="rgba(255,255,255,0.3)"/>
+
+  <!-- Spine rings -->
+  <rect x="18" y="32" width="12" height="10" rx="5" fill="white"/>
+  <rect x="18" y="54" width="12" height="10" rx="5" fill="white"/>
+  <rect x="18" y="76" width="12" height="10" rx="5" fill="white"/>
+
+  <!-- Bottom page line -->
+  <rect x="36" y="92" width="56" height="6" rx="3" fill="white" opacity="0.6"/>
+
+  <!-- Checkmark -->
+  <path
+    d="M48 62 L60 74 L82 50"
+    fill="none"
+    stroke="white"
+    stroke-width="8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
