@@ -2,21 +2,14 @@ class AddSlugToAccounts < ActiveRecord::Migration[7.2]
   def change
     add_column :accounts, :slug, :string
 
-    # Generate slugs for existing accounts
+    # Generate slugs for existing accounts using raw SQL (avoids model loading issues)
     reversible do |dir|
       dir.up do
-        Account.reset_column_information
-        Account.find_each do |account|
-          slug = account.name.parameterize
-          # Ensure uniqueness
-          counter = 1
-          base_slug = slug
-          while Account.exists?(slug: slug)
-            slug = "#{base_slug}-#{counter}"
-            counter += 1
-          end
-          account.update_column(:slug, slug)
-        end
+        execute <<-SQL
+          UPDATE accounts
+          SET slug = LOWER(REPLACE(REPLACE(name, ' ', '-'), '''', ''))
+          WHERE slug IS NULL
+        SQL
       end
     end
 
